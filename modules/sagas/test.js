@@ -35,9 +35,33 @@ function* watchFetchtest() {
 	yield takeLatest(t.TEST_START, fetchtest);
 }
 
+
+function* getVideo(action) {
+	try {
+        console.log('들어온다')
+        console.log('들어온다1')
+		console.log(action)
+		console.log(action.payload)
+		const response = yield fetch("/api/test", {
+			method: "POST",
+			body: JSON.stringify(action.payload),
+		});
+		const employeeList = yield response.json();
+		console.log('employeeList222')
+		console.log(employeeList)
+
+	} catch (error) {
+	}
+}
+
+function* watchGetVideo() {
+	yield takeLatest(t.GET_VIDEO, getVideo);
+}
+
 export default function* rootSaga() {
 	yield all([
 		watchFetchtest(),
+		watchGetVideo()
 		// watchAddEmployee(),
 		// watchRemoveEmployee(),
 		// watchUpdateEmployee(),
