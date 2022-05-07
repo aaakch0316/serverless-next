@@ -25,6 +25,14 @@ const CrudEdit = ({testData, createOrUpdateCard, deleteCard}) => {
             [event.currentTarget.name]: event.currentTarget.value,
         });
     };
+    const onCheck = event => {
+        // console.log(event.target.checked)
+        // console.log(event.target.name)
+        createOrUpdateCard({
+            ...testData,
+            [event.currentTarget.name]: event.target.checked,
+        })
+    }
     
     const onSubmit = () => {
         deleteCard(testData);
@@ -32,11 +40,11 @@ const CrudEdit = ({testData, createOrUpdateCard, deleteCard}) => {
     return (
         <form>
             <input
-                type="text"
+                type="checkbox"
                 name="isCheck"
                 ref={isCheckRef}
                 value={isCheck}
-                onChange={onChange}
+                onChange={onCheck}
             />
             <input
                 type="text"
